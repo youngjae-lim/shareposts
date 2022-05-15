@@ -26,7 +26,7 @@
             <span class="invalid-feedback"><?php echo $data["confirm_password_err"]; ?></span>
           </div>
 
-          <div class="d-grid gap-2 d-md-block col-6">
+          <div class="d-grid gap-2 d-md-block">
             <input type="submit" value="Register" class="btn btn-success"> 
             <a href="<?php echo URLROOT; ?>/users/login" class="btn btn-light">Have an account? Login</a>
           </div>

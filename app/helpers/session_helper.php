@@ -5,7 +5,7 @@
   // Flash message helper
   // Usage - flash('register_success', 'Your are now registered');
   // Display in View -  echo flash('register_success');
-function flash($name = '', $message = '', $class = 'alert alert-success')
+function flash($name = '', $message = '', $class = 'alert alert-success mt-2')
 {
     if (!empty($name)) {
         if (!empty($message)) {

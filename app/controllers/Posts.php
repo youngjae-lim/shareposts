@@ -123,7 +123,7 @@ class Posts extends Controller
             $post = $this->postModel->getPostById($id);
 
             // Check if the current logged-in user is an author of the post
-            // Then make a /posts/edit as a protected route from non-authors
+            // Then make a /posts/edit/:id as a protected route from non-authors
             if ($post->user_id != $_SESSION['user_id']) {
                 redirect('posts');
             }
@@ -137,6 +137,29 @@ class Posts extends Controller
 
             // Render edit view
             $this->view('posts/edit', $data);
+        }
+    }
+
+    public function delete($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Get the existing post data by post id
+            $post = $this->postModel->getPostById($id);
+
+            // Check if the current logged-in user is an author of the post
+            // Then make a /posts/delete/:id as a protected route from non-authors
+            if ($post->user_id != $_SESSION['user_id']) {
+                redirect('posts');
+            }
+
+            if ($this->postModel->deletePost($id)) {
+                flash('post_message', 'Post Deleted!');
+                redirect('posts');
+            } else {
+                die('Something went wrong');
+            }
+        } else {
+            redirect('posts');
         }
     }
 

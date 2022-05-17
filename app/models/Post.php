@@ -11,7 +11,7 @@ class Post
 
     public function getPosts()
     {
-        $this->db->query('SELECT *, posts.user_id as postId, users.id as userId, posts.created_at as postedDate
+        $this->db->query('SELECT *, posts.id as postId, users.id as userId, posts.created_at as postedDate
                           FROM posts
                           INNER JOIN users
                           ON posts.user_id = users.id
@@ -21,6 +21,16 @@ class Post
         $results = $this->db->resultSet();
 
         return $results;
+    }
+
+    public function getPostById($id)
+    {
+        $this->db->query('SELECT * FROM posts WHERE id = :id');
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+
+        return $row;
     }
 
     public function addPost($data)
